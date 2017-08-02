@@ -26,3 +26,8 @@ int BinaryGap(int N)
     }
     return maxBinaryGap;
 }
+
+int FrogJmp(int X, int Y, int D)
+{
+    return ceil((double)(Y - X) / D);
+}

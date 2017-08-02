@@ -3,6 +3,6 @@
 
 void main()
 {
-    vector<int> arr({ 9, 3, 9, 3, 9, 7, 9 });
-    int out = OddOccurrencesInArray(arr);
+    int X = 10, Y = 85, D = 30;
+    int jumps = FrogJmp(X, Y, D);
 }
