@@ -3,6 +3,6 @@
 
 void main()
 {
-    int X = 10, Y = 85, D = 30;
-    int jumps = FrogJmp(X, Y, D);
+    vector<int> arr({ 3, 1, 2, 4, 3 });
+    int out = TapeEquilibrium(arr);
 }

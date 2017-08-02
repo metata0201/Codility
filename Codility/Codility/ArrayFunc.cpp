@@ -39,3 +39,26 @@ int PermMissingElem(vector<int> &A)
     }
     return sum - arraySum;
 }
+
+int TapeEquilibrium(vector<int> &A)
+{
+    int i, arraySum = 0, sum1, sum2;
+    unsigned int minDiff = -1;
+    for (i = 0; i < A.size(); i++)
+    {
+        arraySum += A[i];
+    }
+
+    sum1 = 0;
+    sum2 = arraySum;
+    for (i = 0; i < A.size()-1; i++)
+    {
+        sum1 = sum1 + A[i]; // The sum of the first part
+        sum2 = sum2 - A[i]; // The sum of the second part
+        if (minDiff > abs(sum1 - sum2))
+        {
+            minDiff = abs(sum1 - sum2);
+        }
+    }
+    return minDiff;
+}
