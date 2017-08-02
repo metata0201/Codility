@@ -26,3 +26,16 @@ int OddOccurrencesInArray(vector<int> &A)
     }
     return ret;
 }
+
+int PermMissingElem(vector<int> &A)
+{
+    if (A.empty()) { return 1; }
+
+    int sum = 0, arraySum = 0;
+    sum = ((A.size() + 1)*(A.size() + 2)) >> 1; // The sum of arithmetic sequence "1,2,3,...,N+1"
+    for (int i = 0; i < A.size(); i++)
+    {
+        arraySum += A[i];   // The sum of the array.
+    }
+    return sum - arraySum;
+}
