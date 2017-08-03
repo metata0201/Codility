@@ -85,3 +85,22 @@ int MissingInteger(vector<int> &A)
     cout << "Should never be here." << endl;
     return -1;
 }
+
+// Permutation means A[i] must be in the scope of (1,...,N).
+int PermCheck(vector<int> &A)
+{
+    const int len = A.size();
+    vector<bool> buckets(len, false);
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (A[i] >= 1 && A[i] <= len)   // A[i] is within the range[1..1, 000, 000, 000], it used to handle integers that is larger than length.
+            buckets[A[i] - 1] = true;
+    }
+
+    for (int i = 0; i < len; i++)
+    {
+        if (buckets[i] == false)
+            return 0;
+    }
+    return 1;
+}
