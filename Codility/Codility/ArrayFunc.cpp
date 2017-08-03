@@ -62,3 +62,26 @@ int TapeEquilibrium(vector<int> &A)
     }
     return minDiff;
 }
+
+// Solve it with Pigeonhole principle.There are N integers in the input.So for the first N + 1 positive
+// integers, at least one of them must be missing.
+int MissingInteger(vector<int> &A)
+{
+    const int len = A.size() + 1;
+    vector<bool> buckets(len, false);
+    // We only care about the first N + 1 positive integers.The status of integer i + 1 is in buckets[i].
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (A[i]>0 && A[i] <= len)
+            buckets[A[i] - 1] = true;
+    }
+
+    // Find out the missing minimal positive integer.
+    for (int i = 0; i < len; i++)
+    {
+        if (buckets[i] == false)
+            return i + 1;
+    }
+    cout << "Should never be here." << endl;
+    return -1;
+}

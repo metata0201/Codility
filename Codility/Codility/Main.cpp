@@ -3,6 +3,6 @@
 
 void main()
 {
-    vector<int> arr({ 3, 1, 2, 4, 3 });
-    int out = TapeEquilibrium(arr);
+    vector<int> arr({ 1, 3, 6, 4, 1, 2 });
+    int out = MissingInteger(arr);
 }
