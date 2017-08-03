@@ -3,6 +3,6 @@
 
 void main()
 {
-    vector<int> arr({ 1, 3, 6, 4, 1, 2 });
-    int out = MissingInteger(arr);
+    vector<int> arr({ 1, 3, 1, 4, 2, 3, 5, 4 });
+    int out = FrogRiverOne(5, arr);
 }

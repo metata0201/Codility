@@ -104,3 +104,24 @@ int PermCheck(vector<int> &A)
     }
     return 1;
 }
+
+int FrogRiverOne(int X, vector<int> &A)
+{
+    vector<int> pos(X, 1);
+    int sum = X;        // The sum of 'pos' array
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (pos[A[i] - 1] == 1)
+        {
+            sum -= pos[A[i] - 1];
+            pos[A[i] - 1] = 0;
+        }
+        if (sum == 0)   // The earliest time all position values within [1,...,X] appears
+        {
+            return i;
+        }
+    }
+
+    cout << "The frog is never able to jump to the other side of the river!" << endl;
+    return -1;
+}
