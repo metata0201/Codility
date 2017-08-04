@@ -155,3 +155,24 @@ vector<int> MaxCounters(int N, vector<int> &A)
     }
     return counters;
 }
+
+int PassingCars(vector<int> &A)
+{
+    int sum = 0, pairsSum = 0;
+    for (int i = 0; i < A.size(); i++)
+    {
+        sum += A[i];    // A[i] is either 0 or 1
+    }
+
+    for (int i = 0; i < A.size(); i++)
+    {
+        sum -= A[i];    // Calculate the sum of remaining elements by excluding current element
+        if (A[i] == 0)  // Start from 0 to make pair with following 1 elements
+        {
+            pairsSum += sum;
+        }
+        if (pairsSum > 1000000000)
+            return -1;
+    }
+    return pairsSum;
+}
