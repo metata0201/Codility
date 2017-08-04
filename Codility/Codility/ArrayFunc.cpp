@@ -176,3 +176,21 @@ int PassingCars(vector<int> &A)
     }
     return pairsSum;
 }
+
+int CountDiv(int A, int B, int K)
+{
+    int lower = A, upper = B;
+    if (A%K != 0)   // Find the first value after A that is divisible by K
+    {
+        lower = A - A%K + K;
+    }
+    if (B%K != 0)   // Find the last value before B that is divisible by K
+    {
+        upper = B - B%K;
+    }
+
+    if (lower > upper)
+        return 0;
+    else
+        return (upper - lower) / K + 1;
+}
