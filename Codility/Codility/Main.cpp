@@ -3,5 +3,6 @@
 
 void main()
 {
-    int out = CountDiv(0, 1, 11);
+    vector<int> arr({ 4, 2, 2, 5, 1, 5, 8 });
+    int out = MinAvgTwoSlice(arr);
 }

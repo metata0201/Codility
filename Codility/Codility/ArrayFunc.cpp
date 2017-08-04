@@ -194,3 +194,41 @@ int CountDiv(int A, int B, int K)
     else
         return (upper - lower) / K + 1;
 }
+
+// The key to solve this task is these two patterns :
+// (1) There must be some slices, with length of two or three, having the minimal average value among all the slices.
+// (2) And all the longer slices with minimal average are built up with these 2 - element and / or 3 - element small slices.
+int MinAvgTwoSlice(vector<int> &A)
+{
+    float minAvgVal, avgSlice2, avgSlice3;
+    int minAvgPos = 0;                  // The begin position of the first slice with mininal average
+    minAvgVal = (A[0] + A[1]) / 2;      // The mininal average
+
+    for (int i = 0; i < A.size()-2; i++)
+    {
+        // Try the next 2-element slice
+        avgSlice2 = (float)(A[i] + A[i + 1]) / 2;
+        if (avgSlice2 < minAvgVal)
+        {
+            minAvgVal = avgSlice2;
+            minAvgPos = i;
+        }
+
+        // Try the next 3-element slice
+        avgSlice3 = (float)(A[i] + A[i + 1] + A[i + 2]) / 3;
+        if (avgSlice3 < minAvgVal)
+        {
+            minAvgVal = avgSlice3;
+            minAvgPos = i;
+        }
+    }
+
+    // Try the last 2-element slice
+    avgSlice2 = (A[A.size() - 2] + A[A.size() - 1]) / 2;
+    if (avgSlice2 < minAvgVal)
+    {
+        minAvgVal = avgSlice2;
+        minAvgPos = A.size() - 2;
+    }
+    return minAvgPos;
+}
