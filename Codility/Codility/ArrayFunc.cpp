@@ -125,3 +125,33 @@ int FrogRiverOne(int X, vector<int> &A)
     cout << "The frog is never able to jump to the other side of the river!" << endl;
     return -1;
 }
+
+// Use lazy-write to improve the performance.When receiving the max_counter command, we record the current-max value,
+// but do not change the list content.Only when we are going to return the list or increace a specific element, we will
+// apply the stored value to the corresponding element(s).
+vector<int> MaxCounters(int N, vector<int> &A)
+{
+    vector<int> counters(N, 0);
+    int maxCounter  = 0;    // The current maximum value of any counter
+    int lastCounter = 0;    // The used value in previous 'max counter command'
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (A[i] > N)   // A[i]=N+1,max counter command
+        {   // Just record the current maximum value for later write
+            lastCounter = maxCounter;
+        }
+        else
+        {   // 1<=A[i]<=N, increase command
+            counters[A[i] - 1] = max(counters[A[i] - 1], lastCounter);
+            counters[A[i] - 1]++;
+            maxCounter = max(counters[A[i] - 1], maxCounter);
+        }
+    }
+
+    // Update element has never been used after previous 'max counter command'
+    for (int i = 0; i < N; i++)
+    {
+        counters[i] = max(counters[i], lastCounter);
+    }
+    return counters;
+}
