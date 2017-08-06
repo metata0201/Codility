@@ -232,3 +232,49 @@ int MinAvgTwoSlice(vector<int> &A)
     }
     return minAvgPos;
 }
+
+vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q)
+{
+    vector<int> lastSeenPos_A(S.size(), -1);
+    vector<int> lastSeenPos_C(S.size(), -1);
+    vector<int> lastSeenPos_G(S.size(), -1);
+    vector<int> lastSeenPos_T(S.size(), -1);
+    vector<int> ret(Q.size(), 0);
+
+    // Record the last position on which was the genome (A, C, G, T) was seen
+    for (int i = 0; i < S.size(); i++)
+    {
+        LastOcurrPos(lastSeenPos_A, S, 'A', i);
+        LastOcurrPos(lastSeenPos_C, S, 'C', i);
+        LastOcurrPos(lastSeenPos_G, S, 'G', i);
+        LastOcurrPos(lastSeenPos_T, S, 'T', i);
+    }
+
+    // If the last seen genome position based on Q, is large equal than P,we have found the right candidate
+    for (int i = 0; i < Q.size(); i++)
+    {
+        if (lastSeenPos_A[Q[i]] >= P[i])        // 'A':1
+            ret[i] = 1;
+        else if (lastSeenPos_C[Q[i]] >= P[i])   // 'C':2
+            ret[i] = 2;
+        else if (lastSeenPos_G[Q[i]] >= P[i])   // 'G':3
+            ret[i] = 3;
+        else if (lastSeenPos_T[Q[i]] >= P[i])   // 'T':4
+            ret[i] = 4;
+        else
+            cout << "Should never be here." << endl;
+    }
+    return ret;
+}
+
+void LastOcurrPos(vector<int> &outPos, string &S, char c, int idx)
+{
+    if (S[idx] == c)
+    {
+        outPos[idx] = idx;
+    }
+    else if (idx > 0)
+    {
+        outPos[idx] = outPos[idx - 1];
+    }
+}
