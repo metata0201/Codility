@@ -1,4 +1,5 @@
 #include "ArrayFunc.h"
+#include "Sort.h"
 
 vector<int> CyclicRotation(vector<int> &A, int K)
 {
@@ -276,5 +277,76 @@ void LastOcurrPos(vector<int> &outPos, string &S, char c, int idx)
     else if (idx > 0)
     {
         outPos[idx] = outPos[idx - 1];
+    }
+}
+
+int Distinct(vector<int> &A)
+{
+    unordered_set<int> distinctVals(A.begin(), A.end());
+    return distinctVals.size();
+}
+
+int MaxProductOfThree_Basic(vector<int> &A)
+{
+    if (A.size() == 3) { A[0] * A[1] * A[2]; }
+
+    sort(A.begin(), A.end());
+
+    if (A[0] >= 0 || A.back() <= 0)
+    {
+        return A[A.size() - 3] * A[A.size() - 2] * A[A.size() - 1];
+    }
+    else
+    {
+        if (A[0] * A[1] >= A[A.size() - 3] * A[A.size() - 2])
+            return A[0] * A[1] * A.back();
+        else
+            return A[A.size() - 3] * A[A.size() - 2] * A[A.size() - 1];
+    }
+}
+// Time complexity:O(N), space complexity:O(1)
+int MaxProductOfThree_Special(vector<int> &A)
+{
+    if (A.size() == 3) { A[0] * A[1] * A[2]; }
+
+    vector<int> mins(2, 1000), maxs(3, -1000);
+    // Scan the array to get the two smallest elements and the three biggest elements
+    for (int i = 0; i < A.size(); i++)
+    {
+        UpdateMins(mins, A[i]);
+        UpdateMaxs(maxs, A[i]);
+    }
+    return max(mins[0] * mins[1] * maxs[2], maxs[0] * maxs[1] * maxs[2]);
+}
+
+void UpdateMins(vector<int> &mins, int val)
+{   // Find minimal integer, shift down
+    if (val < mins[0])
+    {
+        mins[1] = mins[0];  // The second smallest integer
+        mins[0] = val;      // The smallest integer
+    }
+    else if (val < mins[1])
+    {
+        mins[1] = val;
+    }
+}
+
+void UpdateMaxs(vector<int> &maxs, int val)
+{   // Find maximal integer, shift down
+    if (val > maxs[2])
+    {
+        maxs[0] = maxs[1];  // The third biggest integer
+        maxs[1] = maxs[2];  // The second biggest integer
+        maxs[2] = val;      // The biggest integer
+    }
+    else if (val > maxs[1])
+    {
+        maxs[0] = maxs[1];
+        maxs[1] = val;
+    }
+    else if (val > maxs[0])
+    {
+        maxs[0] = val;
     }
 }
