@@ -350,3 +350,22 @@ void UpdateMaxs(vector<int> &maxs, int val)
         maxs[0] = val;
     }
 }
+
+// If we have any inequality holding for out-of-order elements, we MUST have AT LEAST an inequality holding for three consecutive elements.
+// Reference:https://codesays.com/2014/solution-to-triangle-by-codility/
+int Triangle(vector<int> &A)
+{   // Handle with the special cases
+    if (A.size() < 3) { return 0; }
+
+    sort(A.begin(), A.end());
+
+    for (int i = 0; i < A.size()-2; i++)
+    {
+        if (A[i] >= 0 && A[i] > A[i + 2] - A[i + 1])  // Beware of overflow
+            return 1;
+        // As we all know A[i + 1]<=A[i + 2], if A[i]<0
+        // then A[i] + A[i + 1] < A[i + 2]
+    }
+    cout << "No triangular triplet is found." << endl;
+    return 0;
+}
