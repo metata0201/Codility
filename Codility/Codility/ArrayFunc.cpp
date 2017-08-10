@@ -430,3 +430,57 @@ int NumberOfDiscIntersections_Special(vector<int> &A)
     }
     return interCnt;
 }
+
+int Brackets(string &S)
+{
+    if (S.empty()) { return 1; }
+
+    stack<char> brackets;
+    bool isNested = true;
+    for (int i = 0; i < S.size(); i++)
+    {
+        switch (S[i])
+        {
+        case '(':
+        case '[':
+        case '{':
+            brackets.push(S[i]);
+            break;
+        case ')':
+            if (!brackets.empty() && brackets.top() == '(')
+            {
+                brackets.pop();
+            }
+            else
+            {
+                isNested = false;
+            }
+            break;
+        case ']':
+            if (!brackets.empty() && brackets.top() == '[')
+            {
+                brackets.pop();
+            }
+            else
+            {
+                isNested = false;
+            }
+            break;
+        case '}':
+            if (!brackets.empty() && brackets.top() == '{')
+            {
+                brackets.pop();
+            }
+            else
+            {
+                isNested = false;
+            }
+            break;
+        default:
+            break;
+        }
+        if (isNested == false)
+            break;
+    }
+    return (isNested && brackets.empty());
+}
