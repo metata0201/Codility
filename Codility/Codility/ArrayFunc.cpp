@@ -369,3 +369,64 @@ int Triangle(vector<int> &A)
     cout << "No triangular triplet is found." << endl;
     return 0;
 }
+
+bool LeftCompare(DiscLine d1, DiscLine d2)
+{
+    return (d1.left < d2.left);
+}
+
+// http://www.lucainvernizzi.net/blog/2014/11/21/codility-beta-challenge-number-of-disc-intersections/
+int NumberOfDiscIntersections_Basic(vector<int> &A)
+{
+    if (A.size() < 2) { return 0; }
+
+    int interCnt = 0, len = A.size();
+    vector<DiscLine> discs(len);
+    for (int i = 0; i < len; i++)
+    {
+        discs[i].left  = (long long)i - (long long)A[i];
+        discs[i].right = (long long)i + (long long)A[i];
+    }
+
+    sort(discs.begin(), discs.end(), LeftCompare);
+
+    for (int i = 0; i < len; i++)
+    {
+        for (int j = i-1; j >= 0; j--)
+        {
+            if (discs[i].left <= discs[j].right)
+                interCnt++;
+        }
+    }
+    return interCnt;
+}
+
+// https://stackoverflow.com/questions/4801242/algorithm-to-calculate-number-of-intersecting-discs
+int NumberOfDiscIntersections_Special(vector<int> &A)
+{
+    int interCnt = 0, len = A.size();
+    vector<int> sPoints(len, 0), ePoints(len, 0);
+
+    int sIdx, eIdx, t = 0;
+    for (int i = 0; i < len; i++)
+    {
+        sIdx = (i - A[i] > 0) ? (i - A[i]) : 0;
+        eIdx = (i + A[i] < len - 1) ? (i + A[i]) : (len - 1);
+        sPoints[sIdx]++;
+        ePoints[eIdx]++;
+    }
+
+    for (int i = 0; i < len; i++)
+    {
+        if (sPoints[i] > 0)
+        {
+            interCnt += t*sPoints[i];
+            interCnt += sPoints[i] * (sPoints[i] - 1) / 2;
+            if (interCnt > 10000000)
+                return -1;
+            t += sPoints[i];
+        }
+        t -= ePoints[i];
+    }
+    return interCnt;
+}

@@ -4,6 +4,6 @@
 
 void main()
 {
-    vector<int> arr({ 4, 5, 1, 0 });
-    int out = MaxProductOfThree_Special(arr);
+    vector<int> arr({ 1, 2147483647, 0 });
+    int out = NumberOfDiscIntersections_Basic(arr);
 }
