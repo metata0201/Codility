@@ -506,3 +506,6 @@ int Nesting(string &S);
 
 /*Lesson7 - Fish(N voracious fish are moving along a river.Calculate how many fish are alive.)*/
 int AliveFish(vector<int> &A, vector<int> &B);
+
+/*Lesson8 - EquiLeader(Find the index S such that the leaders of the sequences A[0], A[1], ..., A[S] and A[S + 1], A[S + 2], ..., A[N - 1] are the same.*/
+int EquiLeader(vector<int> &A);

@@ -1,5 +1,8 @@
 #include "ArrayFunc.h"
 #include "Sort.h"
+#include <unordered_map>
+
+using namespace std;
 
 vector<int> CyclicRotation(vector<int> &A, int K)
 {
@@ -602,4 +605,43 @@ int AliveFish(vector<int> &A, vector<int> &B)
     survivals += downStack.size();
 
     return survivals;
+}
+
+int EquiLeader(vector<int> &A)
+{
+    // Calculate each element's occurrence frequency
+    unordered_map<int,int> hashTable;
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (hashTable.count(A[i]) == 0)
+            hashTable[A[i]] = 1;
+        else
+            hashTable[A[i]]++;
+    }
+
+    // Find the leader value and its occurrence frequency
+    int leader = 0, leaderNum = 0;
+    for (auto& x : hashTable)
+    {
+        if (leaderNum < x.second)
+        {
+            leader    = x.first;
+            leaderNum = x.second;
+        }
+    }
+
+    int leftNum = 0, rightNum = leaderNum, equiLeaders = 0;
+    for (int i = 0; i < A.size(); i++)
+    {
+        if (A[i] == leader)
+        {
+            leftNum++;
+            rightNum--;
+        }
+        // Equi leader makes the left array and the right array have leaders of the same value.
+        if (leftNum>(i + 1) / 2 && rightNum > (A.size() - i - 1) / 2)
+            equiLeaders++;
+    }
+
+    return equiLeaders;
 }
