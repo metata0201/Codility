@@ -500,3 +500,6 @@ int Brackets(string &S);
 /*Lesson7 - StoneWall(Cover "Manhattan skyline" using the minimum number of rectangles.)*/
 int StoneWall(vector<int> &H);
 int StoneWall_Special(vector<int> &H);
+
+/*Lesson7 - Nesting(Determine whether given string of parentheses is properly nested.)*/
+int Nesting(string &S);

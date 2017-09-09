@@ -542,3 +542,29 @@ int StoneWall_Special(vector<int> &H)
 
     return minBlocks;
 }
+
+int Nesting(string &S)
+{
+    int isNesting = 1;
+    stack<char> Stack;
+    for (int i = 0; i < S.size(); i++)
+    {
+        switch (S[i])
+        {
+        case '(': Stack.push(S[i]); break;
+        case ')':
+            if (!Stack.empty() && Stack.top() == '(')
+                Stack.pop();
+            else
+                isNesting = 0;
+            break;
+        default:
+            cout << "Illegal character!" << endl;
+            break;
+        }
+
+        if (isNesting == 0)
+            break;
+    }
+    return isNesting && !Stack.size();  // Nesting string must meet the condition.
+}
