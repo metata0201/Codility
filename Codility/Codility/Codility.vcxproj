@@ -65,12 +65,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArrayFunc.cpp" />
+    <ClCompile Include="BinaryTree.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OtherFunc.cpp" />
     <ClCompile Include="Sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayFunc.h" />
+    <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="OtherFunc.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>
