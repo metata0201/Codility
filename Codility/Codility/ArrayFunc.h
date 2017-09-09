@@ -496,3 +496,7 @@ Complexity :
     expected worst - case space complexity is O(N) (not counting the storage required for input arguments).
 */
 int Brackets(string &S);
+
+/*Lesson7 - StoneWall(Cover "Manhattan skyline" using the minimum number of rectangles.)*/
+int StoneWall(vector<int> &H);
+int StoneWall_Special(vector<int> &H);

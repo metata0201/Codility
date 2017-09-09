@@ -484,3 +484,61 @@ int Brackets(string &S)
     }
     return (isNested && brackets.empty());
 }
+
+int StoneWall(vector<int> &H)
+{
+    int minBlocks = 0;
+    stack<int> S;
+
+    for (int i = 0; i < H.size(); i++)
+    {
+        if (S.empty() || S.top() < H[i])
+        {
+            S.push(H[i]);
+        }
+        else
+        {
+            while (!S.empty() && S.top() >= H[i])
+            {
+                if (S.top() > H[i])
+                    minBlocks++;
+                S.pop();
+            }
+            S.push(H[i]);
+        }
+    }
+
+    while (!S.empty())
+    {
+        minBlocks++;
+        S.pop();
+    }
+
+    return minBlocks;
+}
+
+int StoneWall_Special(vector<int> &H)
+{
+    int minBlocks = 0;
+    stack<int> S;
+
+    for (int i = 0; i < H.size(); i++)
+    {
+        // Remove all blocks that are bigger than current height
+        while (!S.empty() && S.top() > H[i])
+        {
+            minBlocks++;
+            S.pop();
+        }
+
+        // New block is required, push it's size to the stack
+        if (S.empty() || S.top() < H[i])
+        {
+            S.push(H[i]);
+        }
+    }
+
+    minBlocks += S.size();
+
+    return minBlocks;
+}
