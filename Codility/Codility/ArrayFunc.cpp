@@ -568,3 +568,38 @@ int Nesting(string &S)
     }
     return isNesting && !Stack.size();  // Nesting string must meet the condition.
 }
+
+int AliveFish(vector<int> &A, vector<int> &B)
+{
+    int survivals = 0;      // The number of fish that will stay alive
+    stack<int> downStack;   // To record the fishs flowing downstream
+
+    for (int i = 0; i < A.size(); i++)
+    {
+        switch (B[i])
+        {
+        case 0:
+            // Fight with previous downstream fish
+            while (!downStack.empty() && downStack.top()<A[i])
+            {
+                downStack.pop();
+            }
+            // The first fish is flowing upstream, or the upstream fish eat all previous downstream fish
+            if (downStack.empty())
+                survivals++;
+            break;
+        case 1:
+            // Push all downstreaming fish into the stack
+            downStack.push(A[i]);
+            break;
+        default:
+            cout << "Illegal direction value!" << endl;
+            break;
+        }
+    }
+
+    // Currently, all left downstream fish in the stack will not meet with any fish.They will stay alive.
+    survivals += downStack.size();
+
+    return survivals;
+}

@@ -503,3 +503,6 @@ int StoneWall_Special(vector<int> &H);
 
 /*Lesson7 - Nesting(Determine whether given string of parentheses is properly nested.)*/
 int Nesting(string &S);
+
+/*Lesson7 - Fish(N voracious fish are moving along a river.Calculate how many fish are alive.)*/
+int AliveFish(vector<int> &A, vector<int> &B);
